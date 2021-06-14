@@ -33,6 +33,7 @@ public class DoorCellOpen : MonoBehaviour
     {
         if (TheDistance <= 1)
         {
+            ExtraCross.SetActive(true);
             ActionDisplay.SetActive(true);
             ActionText.SetActive(true);
         }
