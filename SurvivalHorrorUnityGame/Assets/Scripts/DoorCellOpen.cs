@@ -19,6 +19,9 @@ public class DoorCellOpen : MonoBehaviour
     [SerializeField]
     public AudioSource CreakSound;
 
+    [SerializeField]
+    public GameObject ExtraCross;
+
 
     // Update is called once per frame
     void Update()
@@ -38,6 +41,7 @@ public class DoorCellOpen : MonoBehaviour
         {
             if(TheDistance <= 1)
             {
+                ExtraCross.SetActive(true);
                 this.GetComponent<BoxCollider>().enabled = false;
                 ActionDisplay.SetActive(false);
                 ActionText.SetActive(false);
@@ -51,6 +55,7 @@ public class DoorCellOpen : MonoBehaviour
     {
         ActionDisplay.SetActive(false);
         ActionText.SetActive(false);
+        ExtraCross.SetActive(false);
     }
 
 }
