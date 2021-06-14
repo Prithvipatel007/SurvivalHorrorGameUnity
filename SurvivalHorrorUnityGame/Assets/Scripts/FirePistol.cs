@@ -15,6 +15,13 @@ public class FirePistol : MonoBehaviour
     public AudioSource GunFire;
 
     public bool isFiring = false;
+    
+    [SerializeField]
+    public float TargetDistance;
+
+    [SerializeField]
+    public int DamageAmount = 5;
+
 
     // Update is called once per frame
     void Update()
@@ -31,6 +38,14 @@ public class FirePistol : MonoBehaviour
     IEnumerator FiringPistol()
     {
         isFiring = true;
+        RaycastHit Shot;
+
+        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Shot))
+        {
+            TargetDistance = Shot.distance;
+            Shot.transform.SendMessage("DamageZombie", DamageAmount, SendMessageOptions.DontRequireReceiver);
+        }
+
         TheGun.GetComponent<Animation>().Play("PistolShotAnim");
         MuzzleFlash.SetActive(true);
         MuzzleFlash.GetComponent<Animation>().Play("MuzzleAnim");
@@ -38,7 +53,5 @@ public class FirePistol : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         isFiring = false;
         MuzzleFlash.SetActive(false);
-
-
     }
 }
